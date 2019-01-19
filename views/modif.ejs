@@ -9,9 +9,17 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous">
    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
    <style>
       * {
-         font-family: 'Lobster';
+         font-family: 'Kaushan Script';
+      }
+
+      .btn {
+         position: fixed;
+         right: 2%;
+         top: 2%;
       }
    </style>
 </head>
@@ -32,15 +40,15 @@
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterPv">Pv:</label>
-                  <input onkeyup="sendForm()" type="number" required class="form-control" value="<%= data.pv %>" name="characterPv" id="characterPv"
-                     placeholder="25">
+                  <input onkeyup="sendForm()" type="number" required class="form-control" value="<%= data.pv %>" name="characterPv"
+                     id="characterPv" placeholder="25">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterCa">Classe d'Armure:</label>
-                  <input onkeyup="sendForm()" type="number" required class="form-control" value="<%= data.ca %>" name="characterCa" id="characterCa"
-                     placeholder="12">
+                  <input onkeyup="sendForm()" type="number" required class="form-control" value="<%= data.ca %>" name="characterCa"
+                     id="characterCa" placeholder="12">
                </div>
             </div>
          </div>
@@ -82,43 +90,49 @@
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterDex">Déxterité</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.dexterite %>" class="form-control caracInput onkeyup="sendForm()""
-                     name="characterDex" id="characterDex" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.dexterite %>"
+                     class="form-control caracInput" name="characterDex" id="characterDex"
+                     placeholder="15">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterFor">Force</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.force %>" class="form-control caracInput onkeyup="sendForm()""
-                     name="characterFor" id="characterFor" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.force %>"
+                     class="form-control caracInput" name="characterFor" id="characterFor"
+                     placeholder="15">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterCon">Constitution</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.constitution %>"
-                     class="form-control caracInput onkeyup="sendForm()"" name="characterCon" id="characterCon" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.constitution %>"
+                     class="form-control caracInput" name="characterCon" id="characterCon"
+                     placeholder="15">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterInt">Intelligence</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.intelligence %>"
-                     class="form-control caracInput onkeyup="sendForm()"" name="characterInt" id="characterInt" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.intelligence %>"
+                     class="form-control caracInput" name="characterInt" id="characterInt"
+                     placeholder="15">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterSag">Sagesse</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.sagesse %>" class="form-control caracInput onkeyup="sendForm()""
-                     name="characterSag" id="characterSag" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.sagesse %>"
+                     class="form-control caracInput" name="characterSag" id="characterSag"
+                     placeholder="15">
                </div>
             </div>
             <div class="col-sm">
                <div class="form-group">
                   <label for="characterCha">Charisme</label>
-                  <input onkeyup="sendForm()" type="number" min="1" max="20" required value="<%= data.caracteristiques.charisme %>" class="form-control caracInput onkeyup="sendForm()""
-                     name="characterCha" id="characterCha" placeholder="15">
+                  <input onblur="sendForm()" type="number" min="1" max="30" required value="<%= data.caracteristiques.charisme %>"
+                     class="form-control caracInput" name="characterCha" id="characterCha"
+                     placeholder="15">
                </div>
             </div>
          </div>
@@ -132,12 +146,14 @@
          </ul>
          <div class="form-group">
             <label for="characterArmes">Armes</label>
-            <input onkeyup="sendForm()" type="text" value="<%= data.armes %>" class="form-control" name="characterArmes" id="characterArmes" placeholder="Epée (1D8+2), Bouclier en bois (1D6+1), Couteau (1D4+1)">
+            <input onkeyup="sendForm()" type="text" value="<%= data.armes %>" class="form-control" name="characterArmes"
+               id="characterArmes" placeholder="Epée (1D8+2), Bouclier en bois (1D6+1), Couteau (1D4+1)">
             <small id="helpId" class="form-text text-muted">Veillez a séparer chaques élements d'une virgule (,)</small>
          </div>
          <div class="form-group">
             <label for="characterArmures">Armures</label>
-            <input onkeyup="sendForm()" type="text" value="<%= data.armures %>" class="form-control" name="characterArmures" id="characterArmures" placeholder="Plastron en cuir, Casque de Viking">
+            <input onkeyup="sendForm()" type="text" value="<%= data.armures %>" class="form-control" name="characterArmures"
+               id="characterArmures" placeholder="Plastron en cuir, Casque de Viking">
             <small id="helpId" class="form-text text-muted">Veillez a séparer chaques élements d'une virgule (,)</small>
          </div>
          <div class="form-group">
@@ -152,7 +168,6 @@
                rows="5" placeholder="Background technique du perso: Les infos en plus sur chaques persos, ..."><%= data.descriptionCara %>
             </textarea>
          </div>
-         <button type="submit" class="btn btn-warning">Modifier</button>
          <a class="btn btn-primary" style="margin: 5px 0;" href="/">Retour</a>
       </form>
    </div>
@@ -160,7 +175,7 @@
 <script>
    // Modifie la chemin d'envoi du formulaire
    document.formulaire.action = "/edit/" + getIdURL();
-   
+
    function sendForm() {
       document.formulaire.submit();
    }
@@ -169,4 +184,5 @@
       return window.location.pathname.split('/')[2];
    }
 </script>
+
 </html>

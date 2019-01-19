@@ -94,7 +94,7 @@ app.post('/add', (req, res) => {
    var Armures = Armures.split(',');
    var Description = req.body.characterDescri;
    var DescriptionCara = req.body.characterDescriCara;
-
+   
    var perso = new personnages({
       name: Name,
       race: Race,
@@ -128,7 +128,7 @@ app.post('/add', (req, res) => {
 
 app.post('/edit/:_id?', (req, res) => {
    var id = req.params._id;
-
+   
    // Récupère les données modifiéesS
    var Pv = req.body.characterPv;
    var Ca = req.body.characterCa;
@@ -144,8 +144,8 @@ app.post('/edit/:_id?', (req, res) => {
    var Armures = Armures.split(',');
    var Description = req.body.characterDescri;
    var DescriptionCara = req.body.characterDescriCara;
-
-
+   
+   
    personnages.findByIdAndUpdate(id, {
       pv: Pv,
       ca: Ca,
@@ -165,8 +165,9 @@ app.post('/edit/:_id?', (req, res) => {
       if (err) { res.redirect('/'); };
    });
    // Socket.IO
-
+   
    io.emit("maj");
+   // res.redirect(req.protocol + '://' + req.get('host') + req.originalUrl);
 });
 
 // Supprime le personnages dont l'id est passé en paramètre
