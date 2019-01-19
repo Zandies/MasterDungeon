@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+   <style>
+      * {
+         font-family: 'Lobster';
+      }
+
+      li {
+         font-size: 1.2em;
+      }
+
+      .btn-outline-primary:hover * {
+         color: #fff;
+      }
+   </style>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Personnages | Master Dungeon</title>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Dungeon Master
+      </h1>
+      <ul class="list-group">
+         <% for(const [key, value] of Object.entries(datas)){ %>
+         <li class="list-group-item"><a href="/fiche/<%= key %>">
+               <%= value %>
+               <button class="float-right btn btn-xs btn-danger">
+                  <a style="color: #fff;" href="/delete/<%= key %>">
+                     Supprimer
+                  </a>
+               </button>
+               <button class="float-right btn btn-xs btn-outline-primary" style=" margin-right: 5px">
+                  <a href="/edit/<%= key %>">
+                     Modifier
+                  </a>
+               </button>
+            </a>
+         </li>
+         <% }%>
+         <a class="btn btn-primary" style="margin: 5px 0;" href="/add">Ajouter un personnage</a>
+      </ul>
+      <img src="/images/dices.jpg" class="mx-auto d-block mt-5" alt="Dés">
+   </div>
+</body>
+<!-- Socket.IO -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+
+   // // Connexion
+   // var socket = io.connect('127.0.0.1:3000');
+
+   // // Réception
+   // socket.on('connexion', (data) => {
+   //    changePV(data);
+   // })
+   // socket.on('newPV', (data) => {
+   //    changePV(data);
+   // })
+
+   // // Emission
+   // document.getElementById("PV").addEventListener('input', () => {
+   //    var newPV = document.getElementById("PV").value;
+   //    socket.emit('changePV', newPV);
+   // });
+
+   // socket.emit('connexion', "Nouvelle connection au serveur");
+
+   // // Fonctions
+
+   // function changePV(newPV) {
+   //    document.getElementById("PV").value = newPV;
+   // }
+</script>
+
+</html>

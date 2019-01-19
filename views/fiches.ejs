@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+   <title>Fiche de
+      <%= data.name %>
+   </title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+   <style>
+      * {
+         font-family: 'Lobster';
+      }
+
+      li {
+         font-size: 1.3em;
+         padding: 5px;
+      }
+
+      .btn {
+         position: fixed;
+         right: 2%;
+         top: 2%;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Fiche de personnage</h1>
+      <div class="row">
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterName">Nom: </label><br>
+               <h3>
+                  <%= data.name %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterPv">Pv:</label>
+               <h3>
+                  <%= data.pv %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterCa">Classe d'Armure:</label>
+               <h3>
+                  <%= data.ca %>
+               </h3>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterRace">Race</label>
+               <h3>
+                  <%= data.race %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterSubRace">Sous-Race</label>
+               <h3>
+                  <%= data.subRace %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterClasse">Classe</label>
+               <h3>
+                  <%= data.classe %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterSubClasse">Sous-Classe</label>
+               <h3>
+                  <%= data.subClasse %>
+               </h3>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterDex">Déxterité</label>
+               <h3>
+                  <%= data.caracteristiques.dexterite %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterFor">Force</label>
+               <h3>
+                  <%= data.caracteristiques.force %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterCon">Constitution</label>
+               <h3>
+                  <%= data.caracteristiques.constitution %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterInt">Intelligence</label>
+               <h3>
+                  <%= data.caracteristiques.intelligence %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterSag">Sagesse</label>
+               <h3>
+                  <%= data.caracteristiques.sagesse %>
+               </h3>
+            </div>
+         </div>
+         <div class="col-sm">
+            <div class="form-group">
+               <label for="characterCha">Charisme</label>
+               <h3>
+                  <%= data.caracteristiques.charisme %>
+               </h3>
+            </div>
+         </div>
+      </div>
+      <label>Compétences</label>
+      <ul>
+         <% for(var i = 0; i < data.competences.length; i++) { %>
+         <li>
+            <%= data.competences[i] %>
+         </li>
+         <% }%>
+      </ul>
+
+      <div class="form-group">
+         <label for="characterArmes">Armes</label>
+         <ul>
+            <% for(var i = 0; i < data.armes.length; i++) { %>
+            <li>
+               <%= data.armes[i] %>
+            </li>
+            <% }%>
+         </ul>
+      </div>
+      <div class="form-group">
+         <label for="characterArmures">Armures</label>
+
+         <ul>
+            <% for(var i = 0; i < data.armures.length; i++) { %>
+            <li>
+               <%= data.armures[i] %>
+            </li>
+            <% }%>
+         </ul>
+      </div>
+      <div class="form-group">
+         <label for="characterDescri">Decription du personnage</label>
+         <h5>
+            <%= data.description %>
+         </h5>
+      </div>
+      <div class="form-group">
+         <label for="characterDescriCara">Caractéristiques du personnage (Technique)</label>
+         <h5>
+            <%= data.descriptionCara %>
+         </h5>
+      </div>
+      <a class="btn btn-primary" style="margin: 5px 0;" href="/">Retour</a>
+   </div>
+</body>
+
+</html>

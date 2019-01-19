@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Ajouter un personnage</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+   <style>
+      * {
+         font-family: 'Lobster';
+      }
+      input:required:focus{
+         background-color: #fff;
+         border-color: #ff8080;
+         outline: 0;
+         box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Créer un personnage</h1>
+      <form action="/add" method="POST">
+         <div class="row">
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterName">Nom</label>
+                  <input type="text" required class="form-control" name="characterName" id="characterName" placeholder="Ex: Gültur">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterPv">Pv:</label>
+                  <input type="number" required class="form-control" name="characterPv" id="characterPv" placeholder="25">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterCa">Classe d'Armure:</label>
+                  <input type="number" required class="form-control" name="characterCa" id="characterCa" placeholder="12">
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterRace">Race</label>
+                  <select id="raceDropdown" class="form-control" name="characterRace" id="characterRace">
+                     <option value="Humain">Humain</option>
+                     <option value="Elfe">Elfe</option>
+                     <option value="Demi-Elfe">Demi-Elfe</option>
+                     <option value="Nain">Nain</option>
+                     <option value="Halfelin">Halfelin</option>
+                     <option value="Gnome">Gnome</option>
+                     <option value="Demi-Orque">Demi-Orque</option>
+                     <option value="Drakéide">Drakéide</option>
+                     <option value="Tieffelin">Tieffelin</option>
+                     <option value="Gobelin">Gobelin</option>
+                  </select>
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterSubRace">Sous-Race</label>
+                  <select id="subRaceDropdown" class="form-control" name="characterSubRace" id="characterSubRace">
+                     <option selected value=""></option>
+                     
+                     <option data-race="Humain" value="Rien">(Pas de sous-race)</option>
+                     
+                     <option data-race="Elfe" value="Elfe des Bois">Elfe des bois</option>
+                     <option data-race="Elfe" value="Haut-Elfe">Haut-Elfe</option>
+                     <option data-race="Elfe" value="Elfe noir">Elfe noir</option>
+
+                     <option data-race="Demi-Elfe" value="Rien">(Pas de sous-race)</option>
+                     <option data-race="Demi-Orque" value="Rien">(Pas de sous-race)</option>
+                     
+                     <option data-race="Nain" value="Nain des collines">Nain des collines</option>
+                     <option data-race="Nain" value="Nain des montagnes">Nain des montagnes</option>
+                     
+                     <option data-race="Halfelin" value="Halfelin pied-léger">Halfelin pied-léger</option>
+                     <option data-race="Halfelin" value="Halfelin robuste">Halfelin robuste</option>
+                     
+                     <option data-race="Gnome" value="Gnome des forêts">Gnome des forêts</option>
+                     <option data-race="Gnome" value="Gnome des roches">Gnome des roches</option>
+                     
+                     <option data-race="Drakéide" value="Rien">(Pas de sous-race)</option>
+                     <option data-race="Tieffelin" value="Rien">(Pas de sous-race)</option>
+                     <option data-race="Gobelin" value="Rien">(Pas de sous-race)</option>
+                  </select>
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterClasse">Classe</label>
+                  <select id="classeDropdown" class="form-control" name="characterClasse" id="characterClasse">
+                     <option value="Guerrier">Guerrier</option>
+                     <option value="Barbare">Barbare</option>
+                     <option value="Roublard">Roublard</option>
+                     <option value="Prêtre">Prêtre</option>
+                     <option value="Druide">Druide</option>
+                     <option value="Mage">Mage</option>
+                     <option value="Ensorceleur">Ensorceleur</option>
+                     <option value="Paladin">Paladin</option>
+                     <option value="Barde">Barde</option>
+                     <option value="Moine">Moine</option>
+                     <option value="Artificier">Artificier</option>
+                     <option value="Démoniste">Démoniste</option>
+                  </select>
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterSubClasse">Sous-Classe</label>
+                  <select id="subClasseDropdown" class="form-control" name="characterSubClasse" id="characterSubClasse">
+                     <option selected value=""></option>
+                     <!-- <optgroup label="Guerrier"> -->
+                     <option data-classe="Guerrier" value="Champion">Champion</option>
+                     <option data-classe="Guerrier" value="Maitre de Guerre">Maître De Guerre</option>
+                     <option data-classe="Guerrier" value="Chevalier Occulte">Chevalier Occulte</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Barbare"> -->
+                     <option data-classe="Barbare" value="Voie Du Berserk">Voie du Berserk</option>
+                     <option data-classe="Barbare" value="Voie Du Guerrier Totem">Voie du Guerrier Totem</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Roublard"> -->
+                     <option data-classe="Roublard" value="Assassin">Assassin</option>
+                     <option data-classe="Roublard" value="Voleur">Voleur</option>
+                     <option data-classe="Roublard" value="Jongleur Des Arcanes">Jongleur des Arcanes</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Prêtre"> -->
+                     <option data-classe="Prêtre" value="Domaine de la Connaissance">Domaine de la Connaissance</option>
+                     <option data-classe="Prêtre" value="Domaine de la Vie">Domaine de la Vie</option>
+                     <option data-classe="Prêtre" value="Domaine de la lumière">Domaine de la lumière</option>
+                     <option data-classe="Prêtre" value="Domaine de la Nature">Domaine de la Nature</option>
+                     <option data-classe="Prêtre" value="Domaine de la Tempête">Domaine de la Tempête</option>
+                     <option data-classe="Prêtre" value="Domaine de la Tromperie">Domaine de la Tromperie</option>
+                     <option data-classe="Prêtre" value="Domaine de la Guerre">Domaine de la Guerre</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Druide"> -->
+                     <option data-classe="Druide" value="Cercle de la Terre">Cercle de la Terre</option>
+                     <option data-classe="Druide" value="Cercle de la Lune">Cercle de la Lune</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Mage"> -->
+                     <option data-classe="Mage" value="Ecole d'abjuration">Ecole d'abjuration</option>
+                     <option data-classe="Mage" value="Ecole de divination">Ecole de divination</option>
+                     <option data-classe="Mage" value="Ecole d'enchantement">Ecole d'enchantement</option>
+                     <option data-classe="Mage" value="Ecole d'évocation">Ecole d'évocation</option>
+                     <option data-classe="Mage" value="Ecole d'illusion">Ecole d'illusion</option>
+                     <option data-classe="Mage" value="Ecole d'Invocation">Ecole d'Invocation</option>
+                     <option data-classe="Mage" value="Ecole de Nécromancie">Ecole de Nécromancie</option>
+                     <option data-classe="Mage" value="Ecole de Transmutation">Ecole de Transmutation</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Ensorceleur"> -->
+                     <option data-classe="Ensorceleur" value="Lignée draconique">Lignée draconique</option>
+                     <option data-classe="Ensorceleur" value="Magie sauvage">Magie sauvage</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Paladin"> -->
+                     <option data-classe="Paladin" value="Serment de Dévotion">Serment de Dévotion</option>
+                     <option data-classe="Paladin" value="Serment des Anciens">Serment des Anciens</option>
+                     <option data-classe="Paladin" value="Serment de Vengeance">Serment de Vengeance</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Barde"> -->
+                     <option data-classe="Barde" value="Collège du Savoir">Collège du Savoir</option>
+                     <option data-classe="Barde" value="Collège de la Vaillance">Collège de la Vaillance</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Moine"> -->
+                     <option data-classe="Moine" value="Voie de la main ouverte">Voie de la main ouverte</option>
+                     <option data-classe="Moine" value="Voie de l'ombre">Voie de l'ombre</option>
+                     <option data-classe="Moine" value="Voie des quatre éléments">Voie des quatre éléments</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Artificier"> -->
+                     <option data-classe="Artificier" value="Ingénieur">Ingénieur</option>
+                     <option data-classe="Artificier" value="Alchimiste">Alchimiste</option>
+                     <!-- </optgroup> -->
+                     <!-- <optgroup label="Démoniste"> -->
+                     <option data-classe="Démoniste" value="Voie du démon">Voie du démon</option>
+                     <!-- </optgroup> -->
+                  </select>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterDex">Déxterité</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterDex" id="characterDex" placeholder="15">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterFor">Force</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterFor" id="characterFor" placeholder="15">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterCon">Constitution</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterCon" id="characterCon" placeholder="15">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterInt">Intelligence</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterInt" id="characterInt" placeholder="15">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterSag">Sagesse</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterSag" id="characterSag" placeholder="15">
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-group">
+                  <label for="characterCha">Charisme</label>
+                  <input type="number" min="1" max="30" required class="form-control caracInput" name="characterCha" id="characterCha" placeholder="15">
+               </div>
+            </div>
+         </div>
+         <label>Compétences</label>
+         <div class="row">
+            <div class="col-sm">
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Acrobaties" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Acrobaties (Dex)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Arcanes" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Arcanes (Int)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Athlétisme" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Athlétisme (For)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Discrétion" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Discrétion (Dex)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Dressage" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Dressage (Sag)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Escamotage" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Escamotage (Dex)
+                  </label>
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Histoire" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Histoire (Int)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Perception" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Perception (Sag)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Investigation" class="form-check-input" name="characterCompetence"
+                        id="characterCompetence" value="checkedValue">
+                     Investigation (Int)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Médecine" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Médecine (Sag)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Intimidation" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Intimidation (Cha)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Nature" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Nature (Int)
+                  </label>
+               </div>
+            </div>
+            <div class="col-sm">
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Survie" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Survie (Sag)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Percpicacité" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Percpicacité (Sag)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Supercherie" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Supercherie (Cha)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Représentation" class="form-check-input" name="characterCompetence"
+                        id="characterCompetence" value="checkedValue">
+                     Représentation (Cha)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Religion" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Religion (Int)
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input type="checkbox" value="Persuasion" class="form-check-input" name="characterCompetence" id="characterCompetence"
+                        value="checkedValue">
+                     Persuasion (Cha)
+                  </label>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="characterArmes">Armes</label>
+            <input type="text" class="form-control" name="characterArmes" id="characterArmes" placeholder="Epée (1D8+2), Bouclier en bois (1D6+1), Couteau (1D4+1)">
+            <small id="helpId" class="form-text text-muted">Veillez a séparer chaques élements d'une virgule (,)</small>
+         </div>
+         <div class="form-group">
+            <label for="characterArmures">Armures</label>
+            <input type="text" class="form-control" name="characterArmures" id="characterArmures" placeholder="Plastron en cuir, Casque de Viking">
+            <small id="helpId" class="form-text text-muted">Veillez a séparer chaques élements d'une virgule (,)</small>
+         </div>
+         <div class="form-group">
+            <label for="characterDescri">Decription du personnage</label>
+            <textarea class="form-control" name="characterDescri" id="characterDescri" rows="3" placeholder="Un petit background historique du personnage (vie, Race, pourquoi est-il devenu aventurier, ...)"></textarea>
+         </div>
+         <div class="form-group">
+            <label for="characterDescriCara">Caractéristiques du personnage (Technique)</label>
+            <textarea class="form-control" name="characterDescriCara" id="characterDescriCara" rows="3" placeholder="Background technique du perso: Les infos en plus sur chaques persos, ..."></textarea>
+         </div>
+         <button type="submit" class="btn btn-success">Créer</button>
+         <a class="btn btn-primary" style="margin: 5px 0;" href="/">Retour</a>
+      </form>
+   </div>
+
+</body>
+<script>
+   // Valeur de caractéristiques par défaut (random)
+
+   function jetDeDé(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+   }
+
+   var caracInput = document.getElementsByClassName('caracInput');
+   for (let i = 0; i < caracInput.length; i++) {
+      caracInput[i].value = jetDeDé(7, 15);
+   }
+
+   // Gestion de l'affichage des menu d'options (races, sours-races + classes, sous-classes) 
+   var race = document.getElementById("raceDropdown");
+   var subRace = document.getElementById("subRaceDropdown");
+   subRace.setAttribute('disabled', 'disabled');
+
+   race.addEventListener('change', () => {
+      subRace.removeAttribute('disabled');
+      var raceSelectionnee = race.options[race.selectedIndex].text;
+      var a = true;
+      for (let i = 0; i < subRace.length; i++) {
+         if (subRace[i].dataset.race != raceSelectionnee) {
+            subRace[i].setAttribute('style', 'display: none');
+         } else if (a == true) {
+            subRace[i].removeAttribute('disabled');
+            subRace[i].setAttribute('selected', 'selected');
+            a = false;
+         } else {
+            subRace[i].setAttribute('style', 'display: initial');
+            subRace[i].removeAttribute('disabled');
+         }
+      }
+   });
+
+   var classe = document.getElementById("classeDropdown");
+   var subClasse = document.getElementById("subClasseDropdown");
+   subClasse.setAttribute('disabled', 'disabled');
+
+   classe.addEventListener('change', () => {
+      subClasse.removeAttribute('disabled');
+      var classeSelectionnee = classe.options[classe.selectedIndex].text;
+      var a = true;
+      for (let i = 0; i < subClasse.length; i++) {
+         if (subClasse[i].dataset.classe != classeSelectionnee) {
+            subClasse[i].setAttribute('style', 'display: none');
+         } else if (a == true) {
+            subClasse[i].removeAttribute('disabled');
+            subClasse[i].setAttribute('selected', 'selected');
+            a = false;
+         } else {
+            subClasse[i].setAttribute('style', 'display: initial');
+            subClasse[i].removeAttribute('disabled');
+         }
+      }
+   });
+</script>
+
+</html>
