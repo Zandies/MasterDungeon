@@ -188,5 +188,15 @@
       <a class="btn btn-primary" style="margin: 5px 0;" href="/">Retour</a>
    </div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+   var socket = io.connect('http://127.0.0.1:3000');
+
+   // Réception
+   socket.on("maj", ()=>{
+      location.reload();
+   });
+
+</script>
 
 </html>

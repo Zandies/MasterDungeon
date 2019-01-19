@@ -1,5 +1,8 @@
 const express = require('express');
+const http = require('http');
 const app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server.listen(3000));
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
@@ -91,7 +94,7 @@ app.post('/add', (req, res) => {
    var Armures = Armures.split(',');
    var Description = req.body.characterDescri;
    var DescriptionCara = req.body.characterDescriCara;
-   
+
    var perso = new personnages({
       name: Name,
       race: Race,
@@ -126,7 +129,7 @@ app.post('/add', (req, res) => {
 app.post('/edit/:_id?', (req, res) => {
    var id = req.params._id;
 
-   // Récupère les données modifiées
+   // Récupère les données modifiéesS
    var Pv = req.body.characterPv;
    var Ca = req.body.characterCa;
    var Dex = req.body.characterDex;
@@ -158,10 +161,12 @@ app.post('/edit/:_id?', (req, res) => {
       armures: Armures,
       description: Description,
       descriptionCara: DescriptionCara
-   },(err) => {
+   }, (err) => {
       if (err) { res.redirect('/'); };
-      res.redirect('/');
    });
+   // Socket.IO
+
+   io.emit("maj");
 });
 
 // Supprime le personnages dont l'id est passé en paramètre
@@ -174,4 +179,3 @@ app.get('/delete/:_id', (req, res) => {
    });
    res.redirect('/');
 });
-app.listen(3000);
