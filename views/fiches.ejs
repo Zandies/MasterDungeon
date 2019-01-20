@@ -5,7 +5,7 @@
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
 
    <title>Fiche de
@@ -22,12 +22,6 @@
       li {
          font-size: 1.3em;
          padding: 5px;
-      }
-
-      .btn {
-         position: fixed;
-         right: 2%;
-         top: 2%;
       }
    </style>
 </head>
@@ -178,16 +172,18 @@
       <div class="form-group">
          <label for="characterDescri">Decription du personnage</label>
          <h5>
-            <%= data.description %>
+            <%- data.description.replace(/\n/g, "<br />") %>
          </h5>
       </div>
       <div class="form-group">
          <label for="characterDescriCara">Caractéristiques du personnage (Technique)</label>
          <h5>
-            <%= data.descriptionCara %>
+            <%- data.descriptionCara.replace(/\n/g, "<br />") %>
          </h5>
       </div>
-      <a class="btn btn-primary" style="margin: 5px 0;" href="/">Retour</a>
+      <a class="btn btn-primary" style="margin: 5px 0; position: fixed; right: 2%; top: 2%;"
+         href="/">Retour</a>
+      <a class="btn btn-warning" id="btn_modifier" style="margin: 5px 0; position: fixed; right: 2%; top: 8%;" href="/">Modifier</a>
    </div>
 </body>
 <script src="/socket.io/socket.io.js"></script>
@@ -195,9 +191,22 @@
    var socket = io.connect('http://192.168.1.9:3000');
 
    // Réception
-   socket.on("maj", ()=>{
-      location.reload();
+   // Véerifie si l'_id du personnage modifié est le même que celui affiché, si c'est la cas, on reload la page
+   socket.on("maj", (_id) => {
+      _id = _id.split('/')[2];
+      if (_id == window.location.pathname.split('/')[2]){
+         location.reload();
+      }
    });
+
+
+   // FIN SOCKET.IO
+
+   document.getElementById('btn_modifier').href = "/edit/" + getIdURL();
+
+   function getIdURL() {
+      return window.location.pathname.split('/')[2];
+   }
 
 </script>
 

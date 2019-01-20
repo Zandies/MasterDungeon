@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const app = express();
 var server = http.createServer(app);
-var io = require('socket.io').listen(server.listen(3000));
+var io = require('socket.io').listen(server.listen(3000, '192.168.1.9'));
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
@@ -144,7 +144,8 @@ app.post('/edit/:_id?', (req, res) => {
    var Armures = Armures.split(',');
    var Description = req.body.characterDescri;
    var DescriptionCara = req.body.characterDescriCara;
-   
+   console.log("Description: " + Description);
+   console.log("Description Caractéristiques: " + DescriptionCara);
    
    personnages.findByIdAndUpdate(id, {
       pv: Pv,
@@ -166,8 +167,8 @@ app.post('/edit/:_id?', (req, res) => {
    });
    // Socket.IO
    
-   io.emit("maj");
-   // res.redirect(req.protocol + '://' + req.get('host') + req.originalUrl);
+   io.emit("maj", req.originalUrl);
+   // res.redirect(req.protocol + '://' + req.get('host') + req.originalUrl);<
 });
 
 // Supprime le personnages dont l'id est passé en paramètre
